@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="ar" hreflang="ar-sa"> 
+<head> 
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="1R__xFZNGhqMoR_j2nlUbNYXENudUImyzE8OMtKgIzY" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta property="og:title" content="دردشه فله الكتابيه" />
+  <meta property="og:description" content="شآت كتآبي بدون تحميل او تسجيل \ دردشه \ مسابقات \ تعارف" />
+  <meta property="og:image" content="prv.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="google" value="notranslate">
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content=" user-scalable=0, width=380" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="شات فله الكتابي , للجوال , شات قمر , إشتراكات السوبر , شات بدون تسجيل او تحميل , شات بدون جافا او فلاش">
+  <title>شات فله الكتابي - للجوال</title>
+  <meta content="دردشه , جوال , للهواتف , جالكسي , نوت3 , نوت4 , نوت5 , بلاكبيري , بلاك بيري , ايفون , محادثه , تعارف , كويت , سعوديه , خليج , عربي"
+  name="keywords">
+  <script> 
+    window.scrollTo(0,1); 
+  </script> 
+  <script src="jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap-theme.min.css">
+  <script src="bootstrap.min.js"></script>
+  <script src="socket.io-1.4.4.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="snap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <script src="client.min.js"></script>
+  <script type="text/javascript" src="jscolor/jscolor.js"></script> 
+  <script type="text/javascript" src="snap.js"></script>
+  <script type="text/javascript" src="app.js?6"></script>
+ <style>
+   .ae{width:100%;padding-top:4px;padding-bottom:3px;padding-left:5px;border:1px solid #438ac7;margin:0px;margin-top:3px; }
+    .pmsgc{background: rgba(0, 77, 255, 0.08)!important;}
+    .msgred{background-color: }
+  .bg{background-color: #353535;}
+  .bgg{background-color:  steelblue;}
+   </style>
+</head>
+
+<body class="bgg" onload="if (typeof load == 'undefined'){setTimeout('location.reload();',6000);return;};load();" style="margin:0px;padding:1px; overflow:hidden;">
+      
+   <div id="content" style="overflow:hidden;height:100%;" class="snap-content  ">
+     <div id="d0"   class="nosel  bgg fl" style="display:none;margin-left:1px;height:100%;margin-top:0px;width:48px; padding:0px;margin-right:0px;">
+      <label title="المتواجدين" href="#" onclick="$('#lhead').text($(this).attr('title'));snapper.open('left');" data-toggle="tab" data-target="#users"  class="ae fa label label-primary fa-user"><span class="busers minix badge border" style="margin-top:-10px;"></span><br>
+		متصل</label>
+          <label title="غرف الدردشه" href="#" onclick="$('#lhead').text($(this).attr('title'));snapper.open('left');" data-toggle="tab" data-target="#roomst" class="ae fa label label-primary fa-users"><br>
+		الغرف</label>
+          <label title="المحادثات الخاصه" href="#" onclick="$('#lhead').text($(this).attr('title'));snapper.open('left');hl($(this),'primary')" data-toggle="tab" data-target="#chats" class="ae fa label chats label-primary fa-comments"><span class="minix badge border" style="margin-top:-10px;"></span><br>
+		الخاص</label>
+          <label title="الحائط" href="#" onclick="$('#lhead').text($(this).attr('title'));snapper.open('left');hl($(this),'primary');$('.bcc').html('');bcc=0;setTimeout(function(){$('#d2bc').scrollTop($('#d2bc')[0].scrollHeight);},1000);" data-toggle="tab" data-target="#wall"  class="ae fa label label-primary fa-comments-o"><span class="badge bx bcc"></span><br>
+		الحائط</label>
+          <label title="الإعدادات" href="#" onclick="$('#lhead').text($(this).attr('title'));snapper.open('left');" data-toggle="tab" data-target="#settings" class="ae label label-primary fa fa-gear"><br>
+		الضبط</label>
+          <label title="الإداره" style="display:none;" href="#" onclick="window.open('cp?token='+token,'_blank');" class="ae label label-danger cp fa fa-star"><br>
+		إداره</label>
+          <label title="إرسال إعلان" style="display:none;" href="#" onclick="pmsg();" class="ae label label-success pmsg fa fa-commenting"><br>
+		إعلان</label>
+          <label href="#" onclick="logout();" class="label ae label-primary fr fa fa-sign-out"><br>
+		خروج</label>
+  
+    
+      </div>
+    
+     <div id="d2" class="d2  corner border break" style="width:100%;display:none;padding-bottom:8px;z-index:-1;background-color:#FEFEFE">
+     </div>
+          <div class="tablebox footer fl bgg" style="width:100%;display:none;">
+      <button onclick="redit();" style=" margin-left:2px;margin-top:2px;" class="redit fa fa-gear fl btn btn-primary"></button>
+      <button onclick="send('rleave',{});" style=" margin-left:2px;margin-top:2px;" class="rout fa fa-sign-out fl btn btn-primary"></button>
+      <img tabindex="0" role="button" data-toggle="popover" data-trigger="focus" class="fl emobox"  style="padding:5px;width:34px;" src="imgs/emoii.gif?3">
+      <textarea id="tbox" style="margin-top:1px;" onclick="$('.pn2').hide();$('.pop').pop('hide');setTimeout(function(){$('#d2').scrollTop($('#d2')[0].scrollHeight);},600);" placeholder="اكتب رسالتك هنا" class="fl corner tbox filw"></textarea>
+      <button onclick="Tsend();" style=" margin-left:2px;margin-top:2px;" class="fa fa-send fl btn btn-primary"></button>
+    </div>
+     <div id='tlogins' class="center-block corner border" style="margin-top:20px;width:320px; background-color:#fefefe">
+           <div class="fl" style="width:100%;">
+            <a href='/' title="شات فله السعودي كام" class="label label-primary   fl fa fa-refresh">
+			دردشه فله الكتابيه</a>
+            <label class="label fr loginstat label-warning  ">يتم الإتصال ..</label>
+           
+          </div> 
+                 <ul class="nav fl nav-pills   nav-tabs" style="margin-bottom:0px;">
+              <li class="active"><a data-toggle="tab" class="  fa fa-user" href="#l1">
+				دخول الزوار</a></li>
+              <li><a data-toggle="tab" class=" fa fa-user" href="#l2">دخول 
+				الاعضاء</a> 
+				</li>
+              <li><a data-toggle="tab" class=" fa fa-user-plus" href="#l3"> 
+				تسجيل عضويه</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </li>
+            </ul>
+            <div id="l1" style="padding:8px;" class="fl grow break tab-pane fade in active">
+              <input class="border corner" id="u1" placeholder="أكتب الاسم المستعار">
+              <button onclick="login(1);" class="btn btn-primary">دخول</button>
+            </div>
+            <div id="l2" style="padding:8px;" class="fl grow break tab-pane fade">
+              <input id="u2" class="border corner" placeholder="اكتب اسم العضو">
+              <input id="pass1" class="border corner" type="password" placeholder="اكتب كلمه المرور">
+              <button onclick="login(2);" class="btn btn-primary">دخول</button>
+            </div>
+            <div id="l3" style="padding:8px;" class="fl grow break tab-pane fade">
+              <input id="u3" class="border corner" placeholder="اكتب اسم العضو">
+              <input id="pass2" class="border corner" type="password" placeholder="اكتب كلمه المرور">
+              <button onclick="login(3);" class="btn btn-primary">دخول</button>
+            </div>
+            <a href='online' title="المتواجدين الآن" class="label label-primary mini fl"><span class="s1 fa fa-user label badgex minix label-warning label-as-badge">
+			..</span>المتواجدين الآن</a><iframe style=' width:100%;border:none;height:300px;' class="corner  " id='getonline'></iframe>
+         <a href="https://www.up-00.com/i/00122/b2aevk5xhyvk.gif" target="_system"><img src="splay.gif" title= "قوانين نظام شات فله"style="height: 64px;"></a>
+<div style="/* position: absolute; */width: 75px;height: 64px;/* z-index: 2111; *//* left: 173px; */float: left;/* top: 22px; */background-color: white;" id="layer1">
+
+
+      
+   <p align="center"><span style="background-color: #FFFF00">
+	<font size="2" color="#0000FF"><b>ا</b></font></span><span lang="en-us"><b><span style="text-decoration: none"><font size="2"><a href="http://www.flhchat.com/ashtrakat/index.html"><span style="text-decoration: none; background-color:#FFFF00">شتراكات
+	</span></a></font></span></b></span></p>
+	<p align="center">
+	<img border="0" src="http://www.flhchat.com/ashtrakat/new.gif" width="38" height="20"></p>
+
+				</div>
+     </div>  
+  </div>
+ <div class="snap-drawers" style="height:100%;">
+            <div class="snap-drawer snap-drawer-left  " style="height:100%;">  
+                <div id="ltabs" class="tab-content  " style="height:100%;">
+                
+                 <div id="users" style="height:100%;" class="break tab-pane fade in active">
+         <input type="search" id="d2"  placeholder " .. البحث" class= "textbox f1 border break" style="width:100%;display:none;padding-left:5px;">
+                  <label style="width:100%;margin:0px;border:none;border-radius:0px;" class="nosel inr mini fl uzr label label-primary">
+					المتواجدين في الغرفه</label>
+                  <label style="width:100%;margin:0px;border:none;padding:6px;border-radius:0px;" class="nosel ninr mini fl uzr label label-primary">
+					المتواجدين في الدردشه</label>
+                 </div>
+                      <div id='settings' class="tab-pane break" style="padding:5px;width:100%;height:100%;">
+<center>  <a class="label label-primary corner fr" >الملف الشخصي</a></center>
+<div   class="border corner" >
+  <div>
+    <center>  
+<img style="width:64px;height:64px;" onclick="sendpic();" src="pic/00.png" class="fitimg border spic corner hand"><br>
+ 
+    </center>
+    <a class="minix btn btn-primary corner hand fa fa-user" style="padding:4px;" onclick="sendpic();" >
+	تغير الصوره</a>
+    <a class="minix btn btn-primary corner hand fa fa-times  " style="padding:5px; " onclick="send('setpic',{pic: 'pic/00.png'});" >
+	حذف الصوره</a>
+   <br>
+ <br>   <div class="mini label label-primary border">الزخرفه</div>
+   <br> <input class="stopic mini corner border dots" style="width:200px;" >
+   <br><div class="mini border label label-primary">الحاله</div>
+    <br><input class="smsg mini corner border dots" style="width:200px;" > 
+   <br> <div class="mini border label label-primary">لون الإسم</div>
+    <input  class="color {pickerPosition:'top'} scolor mini corner border dots" style="width:80px;" > 
+       <br> <div class="mini border label label-primary">لون الخط</div>
+    <input  class="color {pickerPosition:'top'} mcolor mini corner border dots" style="width:80px;" >
+     <br> <div class="mini border label label-primary">لون الخلفيه</div>
+    <input  class="color {pickerPosition:'top'} sbg mini corner border dots" style="width:80px;" > 
+        <a class="mini  btn btn-primary corner hand fa fa-edit fr" style="padding:6px;" onclick="setprofile();" >
+	حفظ</a>
+  
+  </div></div><br>
+<center>  <a class="label label-primary corner fr" >إعدادات الدردشه</a></center>
+<div class="border corner" ><br>
+  <div> <br>
+   
+    <button class="btn btn-primary corner minix"  onclick="if (nopm){nopm=false;$(this).find('span').removeClass('fa-check');}else{nopm=true;$(this).find('span').addClass('fa-check');}"><span class="fa">
+	تعطيل المحادثات الخاصه</span></button> 
+   <button class="btn btn-primary corner minix"  onclick="if (noalert){noalert=false;$(this).find('span').removeClass('fa-check');}else{noalert=true;$(this).find('span').addClass('fa-check');}"><span class="fa">
+	تعطيل التنبيهات</span></button> 
+  </div></div>
+ 
+      </div>
+                 <div id="roomst" style="width:100%;height:100%;" class="  tab-pane fade">
+                  <button onclick="mkr();" class="btn btn-primary   fa fa-plus " style="margin:1px;">
+					إنشاء غرفه جديدة</button>
+                  <div id='rooms' style="width:100%;" class="break filh">
+                      </div>
+                 </div>
+                  <div id="wall" style="width:100%;height:100%;" class="break tab-pane fade">
+  
+      <div id="d2bc" class="d2 d2bc filh  border break corner">
+      </div>
+      <div class="tablebox fl " style="width:100%;">
+        <button onclick="sendbc(true);" style="margin-left:2px; margin-right:3px;margin-top:2px;" class="fr fa fa-share-alt sndfilebc fl btn btn-primary"></button>
+        <img tabindex="0" role="button" data-toggle="popover" data-trigger="focus" class="fl emobc" style="padding:5px;width:34px;" src="imgs/emoii.gif?3">
+        <textarea placeholder="اكتب رسالتك هنا" class="fl tbox corner tboxbc filw"></textarea>
+        <button onclick="sendbc();" style=" margin-top:2px;margin-left:2px;" class="fa fa-send sndbc fl btn btn-primary"></button>
+      </div> 
+        </div>
+             <div id='chats' class="tab-pane break" style="break width:100%;height:100%;">
+
+      </div>
+                </div> 
+            </div> 
+        </div>
+
+ 
+  <x id='uhtml' style='display:none;'>
+    <div class="ui-corner-all ui-shadow hand nosel fl uzr center" style="background-color:white;border:1px solid lightgrey;width:99%;padding:3px;margin:1px;margin-left:-2px;">
+      <img style="width:36px;height:36px;" class="fitimg fl u-pic ">
+      <div style="margin-left:5px;width:82%;" class="fl">
+
+        <div style="width:100%;margin-top:-2px;" class="fl"> <img alt="" class="fr co" style="width:12px;">
+          <img class="fl u-ico"  alt="">
+          <div class="fl" style="width:82%;"><span style="padding:0px 0px;max-width:100%;" class="corner u-topic dots">
+			{1}</span></div>
+        </div>
+        <div style="width:100%;color:#888;margin-top:-8px;" class="fl mini u-msg">
+			هلا .. :){2}</div>
+      </div>
+    </div>
+  </x>
+  <x id='rhtml' style='display:none;'>
+    <div class="ui-corner-all corner room ui-shadow hand nosel fl" style="background-color:white;border:1px solid lightgrey;width:99%;padding:3px;margin:1px;margin-left:2px;">
+      <img class="fl u-pic ">
+      <div style="width:88%;" class="fl">
+        <div style="width:100%;margin-top:-2px;" class="fl"><span class="corner minix label label-primary fr uc"></span>
+          <div style="width:80%;" class="u-topic ui-corner-all dots">{1}</div>
+        </div>
+        <div style="width:100%;color:#888;margin-top:-8px;" class="fl mini u-msg"></div>
+      </div>
+    </div>
+  </x>
+  <x id='uhead' style='display:none;'>
+    <div class="fl uzr" style="margin:0px;width:85%;">
+      <img style="width:36px;height:36px;" class="fitimg fl hand u-pic ">
+      <div style="margin-left:5px;" class="fl filw">
+        <div style="width:100%;margin-top:-1px;" class="fl">
+          <img class="fl u-ico"  alt="">
+          <div class="fl" style="width:82%;"><span style="max-width:100%;padding: 0px 0px;" class="corner nosel u-topic dots">
+			{1}</span></div>
+        </div>
+      </div>
+    </div>
+  </x> 
+    <x id='umsg' style='display:none;'>
+      <div class="uzr fl corner border" style="margin-bottom:-2px;width:98%;padding:0px; background-color:white;">
+      <img style="width:36px;height:38px;margin-left:1px;margin-top:1px;" class="fl fitimg hand u-pic    ">
+      <span style="margin-top:2px;padding:0px 2px;margin-left:-20px;margin-right:4px;color:grey" class="fr minix tago">
+		الآن</span>
+      <div class="uzr fl" style="padding:0px;width:80%">
+      <div  style="padding:0px;width:100%;" class="fl">
+      <img class="fl u-ico" alt="">
+      <span style="padding: 0px 0px;display:block;max-width:82%" class="corner nosel u-topic dots fl hand"></span>
+       </div>
+      <br><div style="padding:0px; width:100%;" class=" u-msg   break  fl"></div>
+      </div> 
+      </div> 
+  </x>
+     <x id='not' class="hid">
+   <div onclick="$(this).remove();"  style="min-width:180px;max-width:260px;border:1px solid black;z-index:2110;background-color:#efefef;position:absolute;top:30%;left:40%;padding:5px; " class="hand corner  ">
+ <center><div class="corner border label label-primary" style="margin-top:-10px;padding-top:10px;padding-left:15px;width:50%;padding-right:15px;">
+	تنبيه</div></center> 
+   </div> 
+   </x>
+    <x id='cw' class="hid">
+    <div class="cont"  style='min-height:100%;width:100%;height:100%;'>
+      <div class="d2 filh border break corner" style="background-color:#f7f7fa">
+      </div>
+      <div class="tablebox footer fl" style="width:100%;">
+        <button style="margin-left:2px; margin-right:3px;margin-top:2px;" class="fr fa fa-share-alt sndfile fl btn btn-primary"></button>
+        <img tabindex="0" role="button" data-toggle="popover" data-trigger="focus" class="fl emo" style="padding:5px;width:34px;" src="imgs/emoii.gif?3">
+        <textarea onfocus="$(window).scrollTop($(window).height()-($('.pop').position().top+$('.pop').outerHeight(true)));" placeholder="اكتب رسالتك هنا" class="fl corner tbox filw"></textarea>
+        <button   style=" margin-top:2px;margin-left:2px;" class="fa fa-send sndpm fl btn btn-primary"></button>
+      </div>
+    </div>
+  </x>
+    <!-- mkr Modal -->
+  <div class="modal fade" id="mkr" role="dialog">
+    <div class="modal-dialog ">
+      <div class="modal-content" style="width:310px;">
+        <div style="color:white;" onclick="$(this).parent().parent().parent().modal('hide') ;" class="modal-header label-primary">
+          <span class="pull-right clickable badge"><i class="fa fa-times"></i></span>
+          <label style="margin:1px;" class="mini fa fa-comments modal-title">
+			إنشاء غرفه جديدة</label>
+        </div>
+        <div class="modal-body" style="padding:1px;">
+          <div class="break" style="background-color:#efefef;padding:5px;">
+            <input class="rtopic" style="width:200px;" type="text" placeholder="عنوان الغرفه">
+            <input class="rabout" style="width:200px;" type="text" placeholder="الوصف">
+            <input class="rwelcome" style="width:200px;" type="text" placeholder="رساله الترحيب">
+           <input class="rpwd" style="width:200px;" type="password" placeholder="كلمه المرور">
+            <input class="rmax" style="width:200px;" type="number" placeholder="حجم الغرفه من 1 ألى 40" min="1" max="40">
+           <label class="checkbox-inline"><input class="rdel" type="checkbox" value="">تثبيت 
+			الغرفه</label><br><br>
+            <button class="rmake btn btn-primary fl"><span class="fa fa-plus">
+			(20)إنشاء الغرفه</span></button>
+            <button class="rsave btn btn-primary fl"><span class="fa fa-edit">
+			حفظ التعديلات</span></button>
+            <button class="rdelete btn btn-primary fl"><span class="fa fa-times">
+			حذف</span></button>
+        <div class="break border corner" id="ops" style="width:100%;padding:2px;" >
+            
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- upro Modal -->
+  <div class="modal fade" id="upro" role="dialog" style="z-index:2100">
+    <div class="modal-dialog ">
+      <div class="modal-content" style="width:310px;">
+        <div style="color:white;" onclick="$(this).parent().parent().parent().modal('hide');" class="modal-header label-primary">
+          <span class="pull-right clickable badge"><i class="fa fa-times"></i></span>
+          <label style="margin:1px;max-width:90%;" class="mini dots nosel modal-title">
+			إنشاء غرفه جديدة</label>
+        </div>
+        <div class="modal-body" style="padding:1px;">
+          <div class="ui-corner-all ui-shadow fl pro center break" style="width:100%;background-color:white;border:1px solid lightgrey; padding:0px;margin:0px;">
+            <center><div class="fitimg border u-pic" style="width:90%;height:200px;"></div>
+ 
+              <label style="margin:0px;padding:2px;" class="fr  border corner label label-primary mini u-uz"></label>
+               
+              <label style="width:100%;" class="ui-shadow ui-corner-all">الحاله</label>
+               
+              <div style="width:95%;" class="ui-corner-all ui-shadow fl u-msg border center"></div>
+              <br>
+              <div style="width:95%;padding:5px;" class="ui-corner-all ui-shadow fl u-room border center"></div>
+            </center>
+            <a class="fa fa-comment  btn ui-corner-all ui-shadow ui-btn ui-btn-inline upm border" style="color:black;margin:2px;">
+			محادثه خاصه</a> 
+            <a class="fa fa-search btn ui-corner-all ui-shadow ui-btn ui-btn-inline uh border" style="color:black;margin:2px;">
+			كشف النكات</a>
+            <a class="fa fa-heart btn ui-corner-all ui-shadow ui-btn ui-btn-inline ulike border" style="color:red;">
+			إعجاب</a>
+            <a class="fa fa-diamond btn ui-corner-all ui-shadow ui-btn ui-btn-inline ugift border" style="color:blue;margin:2px;">
+			ارسل هديه</a>
+            <a class="fa fa-envelope-o btn ui-corner-all ui-shadow ui-btn ui-btn-inline unot border" style="color:black;margin:2px;">
+			تنبيه</a>
+            <a class="fa fa-ban btn ui-corner-all ui-shadow ui-btn ui-btn-inline udelpic border" style="color:maroon;margin:2px;">
+			حذف الصوره</a>
+            <a class="fa fa-ban btn ui-corner-all ui-shadow ui-btn ui-btn-inline ukick border" style="color:crimson;margin:2px;">
+			طرد</a>
+            <a class="fa fa-user-times btn ui-corner-all ui-shadow ui-btn ui-btn-inline urkick border" style="color:darkorchid;margin:2px;">
+			طرد من الغرفه</a>
+            <a class="fa fa-ban btn ui-corner-all ui-shadow ui-btn ui-btn-inline uban border" style="color:crimson;margin:2px;">
+			باند</a>
+            <a class="fa fa-warning btn ui-corner-all ui-shadow ui-btn ui-btn-inline ureport border" style="color:black;margin:2px;">
+			تبليغ</a> 
+           <div class="border powerbox" style="padding:4px;margin-top:2px;">
+             <label>المجموعه</label><br>
+            <select style="width:200px;display:inline" class="userpower selbox form-control">
+            </select><br>
+              <label>المده بالأيام</label><br>
+             <input type="number" class="userdays"><br>
+            <a class="fa fa-check btn ui-corner-all ui-shadow ui-btn ui-btn-inline upower border" style="margin:2px;">
+				حفظ</a>
+             
+           </div>
+           
+             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      setTimeout(function(){
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55130226-3', 'auto');
+  ga('send', 'pageview');     
+      },1000);
+
+</script>
+</body>
+
+</html>
